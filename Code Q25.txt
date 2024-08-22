@@ -1,0 +1,32 @@
+SELECT clarity,
+       -- so, how do we define the most expensive clarity:
+       --
+       -- is it max price, total price, or average price?
+       MAX(price) AS Max_Price,
+       SUM(price) AS Total_Sales,
+       AVG(price) AS Avg_Price1,
+       --
+       -- is it total amount of diamonds sold, or total carats sold?
+       COUNT(price)              AS Diamonds_Sold,
+       ROUND(SUM(carat), 0)      AS Carats_Sold,
+       SUM(price) / COUNT(price) AS Avg_Price2,
+       --
+       -- or maybe it is the average [price per carat],
+       -- then there are two ways of calculating it:
+       ROUND(AVG(price/carat),        0) AS Price_Per_Carat1,
+       ROUND(SUM(price) / SUM(carat), 0) AS Price_Per_Carat2
+FROM Diamonds
+GROUP BY clarity
+ORDER BY 9 DESC -- order by 3,4 or 8,9
+--
+-- Probably, the most sensible choice is to use Price_Per_Carat2 -
+-- if you order the output by this field, all the clarity categories
+-- appear in the natural order (except of VVS1)
+--
+-- However, in PowerBI, we will implement two fields:
+-- * column 8 (Price_Per_Carat1) using calculated column:
+--            price_per_carat = ROUND([price] / [carat], 0)
+--            This formula calculates price/carat expression for each record,
+--            and then visual takes average for each clarity category
+-- * column 9 (Price_Per_Carat2) using Quick Measure,
+--            which will be calculated separately for each clarity category

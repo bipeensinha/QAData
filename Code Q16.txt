@@ -1,0 +1,21 @@
+This can be done using several nested IF statements:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+clarity_label = IF([clarity] = "FL", "0 - FL", IF([clarity] = "IF", "1 - IF", IF([clarity] = "VVS1", "2 - VVS1", IF([clarity] = "VVS2", "3 - VVS2", IF([clarity] = "VS1", "4 - VS1", IF([clarity] = "VS2", "5 - VS2", IF([clarity] = "SI1", "6 - SI1", IF([clarity] = "SI2", "7 - SI2", IF([clarity] = "I1", "8 - I1", IF([clarity] = "I2", "9 - I2", "WRONG DATA"))))))))))
+
+
+
+However, using SWITCH is simpler:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+clarity_label =
+SWITCH ([clarity],
+"FL",   "0 - FL",
+"IF",   "1 - IF",
+"VVS1", "2 - VVS1",
+"VVS2", "3 - VVS2",
+"VS1",  "4 - VS1",
+"VS2",  "5 - VS2",
+"SI1",  "6 - SI1",
+"SI2",  "7 - SI2",
+"I1",   "8 - I1",
+"I2",   "9 - I2",
+"WRONG DATA")
