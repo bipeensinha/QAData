@@ -1,0 +1,1 @@
+=VLOOKUP(G2,AS!$A$2:$B$4, 2, FALSE)
