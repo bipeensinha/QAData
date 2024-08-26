@@ -1,2 +1,3 @@
 =VLOOKUP(G2,AS!$A$2:$B$4, 2, FALSE)
 =VLOOKUP(Z2,WH!$A$2:$B$12, 2, FALSE)
+https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-excel-stunning-report
